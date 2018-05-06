@@ -1,0 +1,12 @@
+.icon {
+    width: 36px;
+    height: 36px;
+    vertical-align: middle;
+}
+.spinning {
+  animation: spinning infinite 2s linear;
+}
+@keyframes spinning {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
