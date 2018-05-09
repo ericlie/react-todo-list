@@ -100,7 +100,8 @@ class Todo extends Component {
     this.setState({task})
   }
 
-  editTask = (task) => {
+  editTask = (e, task) => {
+    console.log(e);
     this.setState({task, isEditing: true})
   }
 

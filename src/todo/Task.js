@@ -1,26 +1,29 @@
 import React, { Component } from 'react';
 import './Task.css';
 import { Button } from 'reactstrap';
+import EditButton from './EditButton';
 
 class Task extends Component {
+  constructor(props) {
+    super(props)
+    this.handleOnEdit = this.handleOnEdit.bind(this)
+  }
+  handleOnEdit(e, task) {
+    this.props.onEdit(e, task)
+  }
   render() {
     if (this.props.tasks.length <= 0) {
       return (<li> Empty list... </li>)
-    }
-    const edit = (task) => {
-      if (! task.isCompleted) {
-        return <Button color="warning" onClick={this.props.onEdit.bind(this, task)} className="float-right mr-1">Edit</Button>
-      }
     }
     return (
       this.props.tasks.map(task => {
         return <li key={task.id} className={(task.isCompleted ? 'completed' : '')}>
           <label className="fake-radio">
-            <input type="checkbox" checked={task.isCompleted} data-task={task} onChange={this.props.onTaskChange.bind(this, task)} />
+            <input type="checkbox" checked={task.isCompleted} onChange={this.props.onTaskChange.bind(this, task)} />
             <span className="checkmark"></span>
             {task.description}
             <Button color="danger" onClick={this.props.onDelete.bind(this, task)} className="float-right">X</Button>
-            {edit(task)}
+            <EditButton task={task} onEdit={this.handleOnEdit} />
           </label>
         </li>
       })
